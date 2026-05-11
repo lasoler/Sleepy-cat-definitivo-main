@@ -7,6 +7,7 @@ public class movpersonaje : MonoBehaviour
     public float velocidad = 0.5f;
     public Vector3 inicioPersonaje = new Vector3(1, 2, 0); // Z siempre en 0
 
+    
     Animator animator;
     SpriteRenderer sr;
 

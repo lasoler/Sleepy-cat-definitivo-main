@@ -10,13 +10,17 @@ public class movPersonajeMinijuego : MonoBehaviour
 
  public float impulsoSalto= 10.0f;
 
+ private bool puedoSaltar= true;
+
+
 
 public Vector3 inicioPersonaje = new Vector3 (1,2,3);
 Animator controlAnimacion;
 
 Rigidbody2D rb;
 
-bool puedoSaltar = false;
+GameObject respawn;
+ 
 
 
 
@@ -24,15 +28,12 @@ bool puedoSaltar = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-     this.transform.position = inicioPersonaje;
+    
      controlAnimacion = GetComponent<Animator>();
      rb = GetComponent<Rigidbody2D>();
+    respawn = GameObject.Find("respawn");
+    transform.position = inicioPersonaje;
 
-
-
-
-
-   
     }
 
 
@@ -67,15 +68,19 @@ bool puedoSaltar = false;
      //SALTO
 
 
-         bool salto = InputSystem.actions["Jump"]. WasPressedThisFrame();
+         bool salto = InputSystem.actions["Jump"]. WasPressedThisFrame( );
          Debug.Log(salto);
-    if(salto == true)
+    
+    if(puedoSaltar && salto)
          {
             Debug.Log("Salto");
             rb.AddForce(transform.up * impulsoSalto, ForceMode2D.Impulse);
+            puedoSaltar = false;
            
          }
-     RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down * 0.5f);
+     
+     
+     /*RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down * 0.5f);
 
      if(hit.collider == true)
         {
@@ -85,9 +90,13 @@ bool puedoSaltar = false;
         {
             puedoSaltar = false;
      
-        }
+        }*/
 
+ }
 
+       void OnCollisionEnter2D(Collision2D collision)
+     {
+        puedoSaltar = true;
+     }
 
-    }
 }
