@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3064470684948458053}
   - component: {fileID: 7485382281170287158}
+  - component: {fileID: 9106781304909926421}
   m_Layer: 0
   m_Name: bascula
   m_TagString: Untagged
@@ -91,3 +92,15 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &9106781304909926421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822890679513179770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08bf92e9a6c75cf4da5765be6e17cd9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::dead

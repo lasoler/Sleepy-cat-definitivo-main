@@ -6,12 +6,15 @@ using UnityEngine;
 public class dead : MonoBehaviour
 
 {
-    private GameObject personaje;
+    private GameObject personajeMinijuego;
+    private movPersonajeMinijuego movPersonajeMinijuego;
     
         // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        personaje = GameObject.Find("Personaje");
+        personajeMinijuego = GameObject.Find("personajeMinijuego");
+        movPersonajeMinijuego = personajeMinijuego.GetComponent<movPersonajeMinijuego>();
+       
     }
 
     // Update is called once per frame
@@ -22,11 +25,10 @@ public class dead : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.name == "personaje")
+        if(coll.name == "personajeMinijuego")
         {
-            Debug.Log("Has muerto");
-            personaje = GameObject.Find("Personaje");
-            personaje.transform.position = new Vector3(1, 2, 0);
+             movPersonajeMinijuego.Respawnear();
+            
         }
         
     }

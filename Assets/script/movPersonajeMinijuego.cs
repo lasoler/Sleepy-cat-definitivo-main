@@ -11,15 +11,11 @@ public class movPersonajeMinijuego : MonoBehaviour
  public float impulsoSalto= 10.0f;
 
  private bool puedoSaltar= true;
+  Animator controlAnimacion;
 
+  Rigidbody2D rb;
 
-
-public Vector3 inicioPersonaje = new Vector3 (1,2,3);
-Animator controlAnimacion;
-
-Rigidbody2D rb;
-
-GameObject respawn;
+  GameObject respawn;
  
 
 
@@ -32,7 +28,7 @@ GameObject respawn;
      controlAnimacion = GetComponent<Animator>();
      rb = GetComponent<Rigidbody2D>();
     respawn = GameObject.Find("respawn");
-    transform.position = inicioPersonaje;
+    Respawnear();
 
     }
 
@@ -98,5 +94,14 @@ GameObject respawn;
      {
         puedoSaltar = true;
      }
+
+ public void Respawnear()
+    {
+        transform.position = respawn.transform.position;
+
+
+
+    }
+
 
 }
