@@ -7,7 +7,7 @@ public class ParpadeoCajaSimple : MonoBehaviour
     private Color colorOriginal;
     
     public Color colorBrillo = Color.yellow;
-    public float velocidad = 5f; // Cuanto más alto, más rápido parpadea
+    public float velocidad = 5f; 
     public GameObject canvasTexto;
      [SerializeField] private string NombreEscena;
     private bool estaCerca = false;
@@ -58,7 +58,7 @@ public class ParpadeoCajaSimple : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             estaCerca = false;
-            sr.color = colorOriginal; // Aseguramos que vuelva a su color al irnos
+            sr.color = colorOriginal; 
         }
         if (canvasTexto != null) 
             {

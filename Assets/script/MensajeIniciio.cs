@@ -12,7 +12,7 @@ public class MostrarImagen : MonoBehaviour
        if (ControladorGlobal.mensajeInicialMostrado == true)
         {
             imagen.SetActive(false);
-            return; // El "return" hace que el código de abajo no se ejecute
+            return; 
         } 
         
         imagen.SetActive(false);

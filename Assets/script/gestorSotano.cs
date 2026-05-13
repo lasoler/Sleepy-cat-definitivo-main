@@ -9,7 +9,6 @@ public class GestorSotano : MonoBehaviour
     {
         if (personajeGato != null && puntoEntrada != null)
         {
-            // Desactivamos físicas un momento para evitar errores de colisión al "teletransportar"
             Rigidbody2D rb = personajeGato.GetComponent<Rigidbody2D>();
             if (rb != null) rb.simulated = false;
 
