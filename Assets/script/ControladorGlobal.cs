@@ -8,4 +8,7 @@ public static class ControladorGlobal
 
     public static bool mensajeInicialMostrado = false;
     
+
+//hola
+
 }
