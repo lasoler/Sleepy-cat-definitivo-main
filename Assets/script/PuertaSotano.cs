@@ -22,7 +22,7 @@ public class PuertaSotano : MonoBehaviour
             {
                 Debug.Log("Está cerrado... necesito buscar la llave en la caja.");
                 
-                // SI EL SCRIPT EXISTE, LANZAMOS EL MENSAJE SUAVE
+               
                 if (scriptMensaje != null)
                 {
                     scriptMensaje.LanzarMensaje();

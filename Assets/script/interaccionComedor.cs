@@ -8,7 +8,7 @@ public class interaccionComedor : MonoBehaviour
    
     public Color colorBrillo = Color.yellow;
     public float velocidadBrillo = 5f; 
-    public GameObject canvasTexto; // El indicador "Pulsa E"
+    public GameObject canvasTexto; 
    
     [Header("Configuración de la Imagen con Fade (LLAVE)")]
     public GameObject objetoConFade;
@@ -32,8 +32,7 @@ public class interaccionComedor : MonoBehaviour
 
     void Update()
     {
-        // REQUISITO: Si no ha ido a la caja o ya dio la llave, salimos del Update inmediatamente
-        // Esto evita el parpadeo y que se pueda pulsar la tecla E
+        
         if (!GameManager.Instance.haVistoMensajeCaja || yaDioLlave) 
         {
             return; 
@@ -41,11 +40,10 @@ public class interaccionComedor : MonoBehaviour
 
         if (estaCerca)
         {
-            // Efecto de parpadeo (Solo ocurre si haVistoMensajeCaja es true)
+            
             float oscilacion = Mathf.Sin(Time.time * velocidadBrillo);
             sr.color = (oscilacion > 0) ? colorBrillo : colorOriginal;
 
-            // Detecta la tecla E
             if (Keyboard.current.eKey.wasPressedThisFrame)
             {
                 EntregarLlave();
@@ -55,13 +53,13 @@ public class interaccionComedor : MonoBehaviour
 
     private void EntregarLlave()
     {
-        // Marcamos como completado para que el Update deje de ejecutarse
+        
         yaDioLlave = true; 
         sr.color = colorOriginal;
 
         if (canvasTexto != null) canvasTexto.SetActive(false);
 
-        // Sumamos la llave y lanzamos el efecto visual
+       
         GameManager.Instance.RecogerLlave();
 
         if (scriptFade != null)
@@ -72,7 +70,7 @@ public class interaccionComedor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Solo detectamos cercanía si el jugador ya sabe que necesita llaves
+      
         if (other.CompareTag("Player") && GameManager.Instance.haVistoMensajeCaja && !yaDioLlave)
         {
             estaCerca = true;

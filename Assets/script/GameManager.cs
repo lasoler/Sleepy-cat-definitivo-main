@@ -11,11 +11,10 @@ public class GameManager : MonoBehaviour
     public bool haVistoMensajeCaja = false;
 
     [Header("Componentes de la Interfaz (UI)")]
-    // Arrastra aquí las 4 imágenes de las llaves (deben tener CanvasGroup)
+   
     public GameObject[] iconosLlaves; 
     public float velocidadFade = 2f; 
 
-    // Referencia interna para el mensaje que se esté mostrando actualmente
     private Coroutine corrutinaMensajeActual;
 
     private void Awake()
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Al empezar, ocultamos todas las llaves de la esquina
+   
         foreach (GameObject llave in iconosLlaves)
         {
             if (llave != null)
@@ -47,17 +46,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // --- LÓGICA DE LAS LLAVES (ESQUINA) ---
 
     public void RecogerLlave()
     {
         if (llavesActuales < llavesTotalesNecesarias)
         {
-            // Seleccionamos la imagen que corresponde a la llave actual
+    
             GameObject llaveAActivar = iconosLlaves[llavesActuales];
             llavesActuales++;
 
-            // Iniciamos su aparición suave
+   
             StartCoroutine(FadeInObjetoUI(llaveAActivar));
         }
     }
@@ -75,13 +73,13 @@ public class GameManager : MonoBehaviour
         cg.alpha = 1f;
     }
 
-    // --- LÓGICA DE MENSAJES (CENTRO) ---
+  
 
     public void MostrarImagenMensaje(GameObject imagenAMostrar, float duracion)
     {
         if (imagenAMostrar == null) return;
 
-        // Si ya hay un mensaje en pantalla, lo cortamos para mostrar el nuevo
+   
         if (corrutinaMensajeActual != null)
         {
             StopCoroutine(corrutinaMensajeActual);
@@ -98,7 +96,7 @@ public class GameManager : MonoBehaviour
         objeto.SetActive(true);
         cg.alpha = 0f;
 
-        // FADE IN
+     
         while (cg.alpha < 1f)
         {
             cg.alpha += Time.deltaTime * velocidadFade;
@@ -106,10 +104,10 @@ public class GameManager : MonoBehaviour
         }
         cg.alpha = 1f;
 
-        // ESPERA
+  
         yield return new WaitForSeconds(duracion);
 
-        // FADE OUT
+
         while (cg.alpha > 0f)
         {
             cg.alpha -= Time.deltaTime * velocidadFade;
