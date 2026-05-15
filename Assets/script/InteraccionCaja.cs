@@ -14,7 +14,9 @@ public class ParpadeoCajaSimple : MonoBehaviour
     private bool estaCerca = false;
 
     [Header("Imágenes de Mensajes (UI)")]
+    // Arrastra aquí la imagen de "Necesitas buscar 4 llaves"
     public GameObject imagenNecesitasLlaves; 
+    // Arrastra aquí la imagen de "Aún te faltan llaves" (opcional, si tienes una genérica)
     public GameObject imagenFaltanLlaves; 
 
     void Start()
@@ -29,7 +31,8 @@ public class ParpadeoCajaSimple : MonoBehaviour
         if (estaCerca)
         {
             float oscilacion = Mathf.Sin(Time.time * velocidad);
-            sr.color = (oscilacion > 0) ? colorBrillo : colorOriginal;
+            if (oscilacion > 0) { sr.color = colorBrillo; } 
+            else { sr.color = colorOriginal; }
 
             if (Keyboard.current.eKey.wasPressedThisFrame)
             {
@@ -44,23 +47,15 @@ public class ParpadeoCajaSimple : MonoBehaviour
         if (!GameManager.Instance.haVistoMensajeCaja)
         {
             GameManager.Instance.haVistoMensajeCaja = true;
-            
-            // CORRECCIÓN: Llamamos al GameManager para usar el Canvas Group
-            if (imagenNecesitasLlaves != null)
-            {
-                GameManager.Instance.MostrarImagenMensaje(imagenNecesitasLlaves, 4f);
-            }
+            // Le mandamos su imagen al GameManager para que la encienda por 4 segundos
+            GameManager.Instance.MostrarImagenMensaje(imagenNecesitasLlaves, 4f);
             return;
         }
 
         // CASO 2: Ya vio el mensaje pero no tiene las 4 llaves
         if (GameManager.Instance.llavesActuales < GameManager.Instance.llavesTotalesNecesarias)
         {
-            // CORRECCIÓN: Llamamos al GameManager para usar el Canvas Group
-            if (imagenFaltanLlaves != null)
-            {
-                GameManager.Instance.MostrarImagenMensaje(imagenFaltanLlaves, 3f);
-            }
+            GameManager.Instance.MostrarImagenMensaje(imagenFaltanLlaves, 3f);
             return;
         }
 
@@ -71,22 +66,8 @@ public class ParpadeoCajaSimple : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            estaCerca = true;
-            if (canvasTexto != null) canvasTexto.SetActive(true);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            estaCerca = false;
-            sr.color = colorOriginal; 
-            if (canvasTexto != null) canvasTexto.SetActive(false);
-        }
-    }
+    // (Tus funciones OnTriggerEnter2D y OnTriggerExit2D se quedan exactamente igual)
+    private void OnTriggerEnter2D(Collider2D other) { if (other.CompareTag("Player")) { estaCerca = true; if (canvasTexto != null) canvasTexto.SetActive(true); } }
+    private void OnTriggerExit2D(Collider2D other) { if (other.CompareTag("Player")) { estaCerca = false; sr.color = colorOriginal; if (canvasTexto != null) canvasTexto.SetActive(false); } }
 }
+

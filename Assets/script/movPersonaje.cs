@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement; // Necesario para detectar cambios de escena
+using UnityEngine.SceneManagement; 
 
 public class movpersonaje : MonoBehaviour
 {
     public float velocidad = 0.5f;
-    public Vector3 inicioPersonaje = new Vector3(1, 2, 0); // Z siempre en 0
-
+    public Vector3 inicioPersonaje = new Vector3(1, 2, 0); 
     
     Animator animator;
     SpriteRenderer sr;
@@ -30,12 +29,11 @@ public class movpersonaje : MonoBehaviour
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         
-        // Llamamos a la función de posicionar por primera vez
+        
         PosicionarGato();
     }
 
-    // Como usas DontDestroyOnLoad, necesitamos esto para que el gato se mueva 
-    // CADA VEZ que una escena nueva termine de cargar
+    
     private void OnEnable() { SceneManager.sceneLoaded += AlCargarEscena; }
     private void OnDisable() { SceneManager.sceneLoaded -= AlCargarEscena; }
 
@@ -46,7 +44,7 @@ public class movpersonaje : MonoBehaviour
 
     void PosicionarGato()
     {
-        // 1. Buscamos si hay un punto especial según el ControladorGlobal
+        
         if (ControladorGlobal.puntoAparicion == 1)
         {
             GameObject spawn = GameObject.FindWithTag("spawnCaja");
@@ -64,11 +62,10 @@ public class movpersonaje : MonoBehaviour
             if (spawn != null) inicioPersonaje = spawn.transform.position;
         }
 
-        // 2. Aplicamos la posición (Esto debe ir AL FINAL para que use el valor actualizado)
+        
         this.transform.position = new Vector3(inicioPersonaje.x, inicioPersonaje.y, 0);
         
-        // 3. Reset de seguridad: Si quieres que al entrar a otra puerta no use el mismo spawn
-        // ControladorGlobal.puntoAparicion = 0; 
+       
     }
 
     void Update()

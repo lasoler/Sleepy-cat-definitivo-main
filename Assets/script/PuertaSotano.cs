@@ -6,7 +6,7 @@ public class PuertaSotano : MonoBehaviour
     public string escenaSotano = "Sotano";
     
     [Header("Referencia al Mensaje")]
-    // Arrastra aquí el objeto que tiene el script MensajeElegante
+    
     public MensajePuerta scriptMensaje; 
 
     private void OnTriggerEnter2D(Collider2D collision)
